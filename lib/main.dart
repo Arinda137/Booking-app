@@ -12,22 +12,14 @@ import 'package:booking/Screens/Settings.dart';
 import 'package:booking/Screens/Signup.dart';
 import'package:flutter/material.dart';
 import'package:booking/Screens/Doctor.dart';
-import 'database_helper.dart'; 
-import'package:booking/Screens/AppointmentBookingScreen.dart';
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure that widget binding is initialized
-  await DatabaseHelper().database; // Initialize the database
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Booking',
-      home: Login(), // Replace with your initial screen
-      theme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+import'package:booking/Screens/AppointmentBookingScreen.dart';
+void main(){runApp(
+  MaterialApp(
+    title: 'Booking',
+    home:Homepage(),
+    themeMode: ThemeMode.system,
+    debugShowCheckedModeBanner: false,
+  ),
+);
 }

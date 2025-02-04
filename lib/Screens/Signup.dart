@@ -1,3 +1,4 @@
+import 'package:booking/Screens/Login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
@@ -111,6 +112,10 @@ class _SignupState extends State<Signup> {
                         );
                       }
                       ;
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return Login();
+                      }));
                     },
                     child: Text('Create Account'))
               ],
