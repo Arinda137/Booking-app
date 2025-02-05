@@ -68,7 +68,9 @@ class _HomepageState extends State<Homepage> {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: (){},icon:Icon(Icons.favorite_border)),
+                  IconButton(onPressed: (){
+
+                  },icon:Icon(Icons.favorite_border)),
                   InkWell(child: Text('Saved',style: TextStyle(fontSize: 12)),onTap: (){},)
                 ],
               ),
@@ -76,7 +78,15 @@ class _HomepageState extends State<Homepage> {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: (){},icon: FaIcon(FontAwesomeIcons.book),),
+                  IconButton(onPressed: (){
+                    setState(() {
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Booking();
+    }));
+    },
+                    );
+                  },icon: FaIcon(FontAwesomeIcons.book),),
                   InkWell(child: Text('Bookings',style: TextStyle(fontSize: 12),),
                     onTap: (){
                     Navigator.push(context,MaterialPageRoute(builder:(context) => Booking(),));

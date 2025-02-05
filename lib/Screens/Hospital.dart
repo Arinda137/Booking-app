@@ -11,14 +11,34 @@ class _HospitalState extends State<Hospital> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Hospital')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentBookingScreen()));
-          },
-          child: Text('Book Appointment'),
-        ),
-      ),
+      body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('Assets/images/Rob.jpg'),
+              fit: BoxFit.cover,
+            ),
+          )
+      )
     );
   }
 }
+
+// Column(children: [
+// Center(
+// child:    Container(
+// decoration: BoxDecoration(
+// image: DecorationImage(
+// image: AssetImage('Assets/images/Rob.jpg'),
+// fit: BoxFit.cover,
+// ),
+// )
+// )
+// ),
+// ElevatedButton(
+// onPressed: () {
+// Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentBookingScreen()));
+// },
+// child: Text('Book Appointment'),
+// )
+// ],
+// ),
