@@ -10,15 +10,28 @@ class _HospitalState extends State<Hospital> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hospital')),
-      body: Container(
+      // appBar: AppBar(title: Text('Hospital')),
+      body:Stack(
+        children:[Container(
+
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('Assets/images/Rob.jpg'),
               fit: BoxFit.cover,
             ),
-          )
-      )
+          ),
+
+        ),
+             Center(  child: ElevatedButton(
+               onPressed: () {
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => AppointmentBookingScreen()));
+               },
+               child: Text('Book Appointment'),
+             ),)
+
+             ]
+      ),
+
     );
   }
 }

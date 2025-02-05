@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../database_helper.dart';
 
 class AppointmentBookingScreen extends StatefulWidget {
   @override
-  _AppointmentBookingScreenState createState() => _AppointmentBookingScreenState();
+  _AppointmentBookingScreenState createState() =>
+      _AppointmentBookingScreenState();
 }
 
 class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
   DateTime? _selectedDate;
   String? _selectedDoctor;
 
@@ -17,16 +16,30 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
     'Dr. Mukundane Mark'
   ];
 
-  void _bookAppointment() async {
-    if (_selectedDoctor != null && _selectedDate != null) {
-      await _dbHelper.insertAppointment({
-        'user_id': 1, // Replace with actual user ID
-        'doctor_id': 1, // Replace with actual doctor ID
-        'date': _selectedDate!.toIso8601String(),
-        'time': '10:00 AM', // Replace with actual time
-        'status': 'Booked',
+  void _pickDate() async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 1),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDate = pickedDate;
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Appointment booked successfully!')));
+    }
+  }
+
+  void _bookAppointment() {
+    if (_selectedDoctor != null && _selectedDate != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Appointment booked successfully!')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please select a doctor and date')),
+      );
     }
   }
 
@@ -36,6 +49,7 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
       appBar: AppBar(title: Text('Book Appointment')),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             DropdownButton<String>(
               hint: Text('Select Doctor'),
@@ -52,7 +66,18 @@ class _AppointmentBookingScreenState extends State<AppointmentBookingScreen> {
                 );
               }).toList(),
             ),
-            ElevatedButton(onPressed: _bookAppointment, child: Text('Book Appointment')),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _pickDate,
+              child: Text(_selectedDate == null
+                  ? 'Pick Date'
+                  : 'Selected: ${_selectedDate!.toLocal()}'.split(' ')[0]),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _bookAppointment,
+              child: Text('Book Appointment'),
+            ),
           ],
         ),
       ),
